@@ -12,7 +12,9 @@
     scrollbar-color: #787777 #1e1e1e;
 }
 
-body{
+html , body{
     color: white;
     background-color: #09090B;
+    margin:  0;
+    padding: 0;
 }
