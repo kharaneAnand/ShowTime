@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { dummyDateTimeData, dummyShowsData } from "../assets/assets";
-import BlurCircle from "../components/BlurCircle";
 import { Heart, PlayCircleIcon, StarIcon } from "lucide-react";
 import timeFormat from "../lib/timeFormat";
+import DateSelect from "../components/DateSelect";
 
 const MovieDetails = () => {
   const { id } = useParams();
@@ -54,7 +54,7 @@ const MovieDetails = () => {
               Watch Trailer
             </button>
             <a
-              href=""
+              href="#dateSelect"
               className="px-10 py-3 text-sm bg-primary hover:bg-primary-dull transition rounded-md font-medium cursor-pointer active:scale-95 "
             >
               Buy Tickets
@@ -65,6 +65,26 @@ const MovieDetails = () => {
           </div>
         </div>
       </div>
+
+      <p className="text-lg font-medium mt-20">Your Favorite Cast</p>
+      <div className="overflow-x-auto no-scrollbar mt-8 pb-4 ">
+        <div className="flex items-center gap-4 w-max px-4">
+          {show.movie.casts.slice(0, 12).map((cast, index) => (
+            <div
+              key={index}
+              className="flex flex-col items-center text-center "
+            >
+              <img
+                src={cast.profile_path}
+                alt="cast image"
+                className="rounded-full h-20 md:h-20 aspect-square object-cover"
+              />
+              <p className="font-medium text-xs mt-3">{cast.name}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+      <DateSelect dateTime={show.dateTime} id={id} />
     </div>
   ) : (
     <div>Loading...</div>
