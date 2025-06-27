@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { dummyShowsData } from "../../assets/assets";
 import Loading from "../../components/Loading";
 import Title from "../../components/admin/Title";
+import { dateFormat } from "../../lib/DateFormat";
 
 const ListShows = () => {
   const currency = import.meta.env.VITE_CURRENCY;
@@ -45,6 +46,24 @@ const ListShows = () => {
               <th className="p-2 font-medium ">Earnings</th>
             </tr>
           </thead>
+          <tbody className="text-sm font-light">
+            {shows.map((shows, index) => (
+              <tr
+                key={index}
+                className="border-b border-primary/10 bg-primary/5 even:bg-primary/10"
+              >
+                <td className="p-2 min-w-45 pl-5">{shows.movie.title}</td>
+                <td className="p-2">{dateFormat(shows.showDateTime)}</td>
+                <td className="p-2">
+                  {Object.keys(shows.occupiedSeats).length}
+                </td>
+                <td className="p-2">
+                  {currency}{" "}
+                  {Object.keys(shows.occupiedSeats).length * shows.showPrice}
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
     </>
